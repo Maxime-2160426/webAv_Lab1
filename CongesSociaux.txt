@@ -1,0 +1,22 @@
+CRUD
+
+-Congé
+
+-Employé -BanqueMaladie
+
+-Période
+
+-Type Congé
+
+-Département
+
+
+Service
+
+-VerifCongeDispo() {Verif Durée}
+
+-creaBanqueMala() {}
+
+-misAJourBanqueMala() {}
+
+-misAJourPeriode() {}
