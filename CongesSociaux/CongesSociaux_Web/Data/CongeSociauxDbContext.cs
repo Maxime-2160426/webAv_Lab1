@@ -13,5 +13,10 @@ namespace CongesSociaux_Web.Data
             : base(options)
         {
         }
+
+        DbSet<Soutien> Soutiens { get; set; }
+        DbSet<Enseignant> Enseignants { get; set; }
+        DbSet<Departement> Departements { get; set; }
+
     }
 }
