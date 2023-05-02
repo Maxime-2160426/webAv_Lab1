@@ -38,7 +38,8 @@ namespace CongesSociaux_Web.Services
                     Nom = vm.Nom,
                     DateEmbauche = vm.DateEmbauche,
                     Specialite = vm.Specialite,
-                    Type = vm.Type
+                    Type = vm.Type,
+                    Departement = vm.Departement
                 };
 
                 _context.Enseignants.Add(employe);
@@ -52,14 +53,14 @@ namespace CongesSociaux_Web.Services
             Periode periodeCourante = new Periode();
             if (employe.Type == TypeEmploye.Soutien)
             {
-                periodeCourante = _context.Periodes.Where(x => x.PeriodeActive == true && x.TypeEmploye == TypeEmploye.Soutien).Include(x => x.TypeConges).First();
+                periodeCourante = _context.Periodes.Where(x => x.PeriodeActive == true && x.TypeEmploye == TypeEmploye.Soutien)
+                                          .Include(x => x.TypeConges).First();
             }
             else
             {
-                periodeCourante = _context.Periodes.Where(x => x.PeriodeActive == true && x.TypeEmploye == TypeEmploye.Enseignant).Include(x => x.TypeConges).First();
+                periodeCourante = _context.Periodes.Where(x => x.PeriodeActive == true && x.TypeEmploye == TypeEmploye.Enseignant)
+                                          .Include(x => x.TypeConges).First();
             }
-
-            periodeCourante = _context.Periodes.Where(x => x.PeriodeActive == true).Include(x => x.TypeConges).First();
 
             BanqueMaladie banqueMaladie = new BanqueMaladie()
             {
@@ -74,7 +75,42 @@ namespace CongesSociaux_Web.Services
 
         public void MisAJourBanqueMala()
         {
-            throw new NotImplementedException();
+            List<Enseignant> enseignants = _context.Enseignants.ToList();
+            List<Soutien> soutiens = _context.Soutiens.ToList();
+
+            foreach (var item in enseignants)
+            {
+                Periode periodeCourante = new Periode();
+                periodeCourante = _context.Periodes.Where(x => x.PeriodeActive == true && x.TypeEmploye == TypeEmploye.Enseignant)
+                                          .Include(x => x.TypeConges).Include(x => x.BanqueMaladies).ThenInclude(x => x.Employe).First();
+                TypeConge congeMaladie = periodeCourante.TypeConges.Where(x => x.Description == "Maladie").First();
+
+                BanqueMaladie bbq = periodeCourante.BanqueMaladies.Where(x => x.Employe.Id == item.Id).First();
+                if (!congeMaladie.Cumulable)
+                    bbq.Solde = congeMaladie.NombreJours;
+                else
+                    bbq.Solde += congeMaladie.NombreJours;
+
+                _context.Update(bbq);
+            }
+
+            foreach (var item in soutiens)
+            {
+                Periode periodeCourante = new Periode();
+                periodeCourante = _context.Periodes.Where(x => x.PeriodeActive == true && x.TypeEmploye == TypeEmploye.Soutien)
+                                          .Include(x => x.TypeConges).Include(x => x.BanqueMaladies).ThenInclude(x => x.Employe).First();
+                TypeConge congeMaladie = periodeCourante.TypeConges.Where(x => x.Description == "Maladie").First();
+
+                BanqueMaladie bbq = periodeCourante.BanqueMaladies.Where(x => x.Employe.Id == item.Id).First();
+                if (!congeMaladie.Cumulable)
+                    bbq.Solde = congeMaladie.NombreJours;
+                else
+                    bbq.Solde += congeMaladie.NombreJours;
+
+                _context.Update(bbq);
+            }
+            
+            _context.SaveChanges();
         }
 
     }
