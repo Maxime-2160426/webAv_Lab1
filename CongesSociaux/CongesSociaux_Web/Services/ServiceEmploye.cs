@@ -1,11 +1,13 @@
 ﻿using CongesSociaux_Web.Models;
 using CongesSociaux_Web.Services.IServices;
+using CongesSociaux_Web.ViewModels;
 
 namespace CongesSociaux_Web.Services
 {
     public class ServiceEmploye : IServiceEmploye
     {
-        public void AddEmploye()
+
+        public void AddEmploye(CreaEmployeVM employe)
         {
             throw new NotImplementedException();
         }
