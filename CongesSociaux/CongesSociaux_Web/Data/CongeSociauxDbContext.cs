@@ -17,5 +17,10 @@ namespace CongesSociaux_Web.Data
         public DbSet<Soutien> Soutiens { get; set; }
         public DbSet<Enseignant> Enseignants { get; set; }
         public DbSet<Departement> Departements { get; set; }
+        public DbSet<BanqueMaladie> BanquesMaladie { get; set; }
+
+        
+        public DbSet<Periode> Periodes { get; set; }
+        public DbSet<TypeConge> TypeConges { get; set; }
     }
 }
