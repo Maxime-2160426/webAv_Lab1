@@ -7,5 +7,6 @@ namespace CongesSociaux_Web.Services.IServices
         public void CreaBanqueMala(Employe employe);
         public void MisAJourBanqueMala();
         public void AddEmploye();
+        public void MisAJourPeriode(string nomPeriode, int typeEmploye );
     }
 }
