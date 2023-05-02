@@ -13,5 +13,8 @@ namespace CongesSociaux_Web.Data
             : base(options)
         {
         }
+
+
+        public DbSet<Conge> Conges { get; set; }
     }
 }
