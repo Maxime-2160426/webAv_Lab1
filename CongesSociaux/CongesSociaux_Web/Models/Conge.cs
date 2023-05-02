@@ -2,13 +2,13 @@
 {
     public class Conge
     {
-        public int Id { get; set; }
+        public int CongeId { get; set; }
         public DateTime DateDebut { get; set; }
         public int Duree { get; set; }
         public string Description { get; set; }
 
-
-        public Employe Employe { get; set; }
+        public int TypeCongeId { get; set; }
         public TypeConge TypeConge { get; set; }
+        public Employe Employe { get; set; }
     }
 }

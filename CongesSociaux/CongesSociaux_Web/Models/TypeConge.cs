@@ -7,7 +7,8 @@
         public bool Cumulable { get; set; }
         public int NombreJours  { get; set; }
 
-        public Periode Periode { get; set; }
+        //public Periode Periode { get; set; }
+        public IEnumerable<Conge> Conges { get; set; }
 
     }
 }

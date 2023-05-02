@@ -4,6 +4,6 @@ namespace CongesSociaux_Web.Services.IServices
 {
     public interface IServiceConge
     {
-        public bool VerifCongeDispo(int employeId, TypeConge type) { return false; }
+        public bool VerifCongeDispo(Conge conge) => false;
     }
 }
