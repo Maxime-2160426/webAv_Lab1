@@ -25,7 +25,8 @@ namespace CongesSociaux_Web.Services
                     Prenom = vm.Prenom,
                     Nom = vm.Nom,
                     DateEmbauche = vm.DateEmbauche,
-                    Poste = vm.Poste
+                    Poste = vm.Poste,
+                    Type = vm.Type
                 };
                 _context.Soutiens.Add(employe);
             }
@@ -36,11 +37,13 @@ namespace CongesSociaux_Web.Services
                     Prenom = vm.Prenom,
                     Nom = vm.Nom,
                     DateEmbauche = vm.DateEmbauche,
-                    Specialite = vm.Specialite
+                    Specialite = vm.Specialite,
+                    Type = vm.Type
                 };
 
                 _context.Enseignants.Add(employe);
             }
+            await _context.SaveChangesAsync();
         }
 
 
