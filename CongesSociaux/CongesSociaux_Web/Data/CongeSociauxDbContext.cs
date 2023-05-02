@@ -16,5 +16,10 @@ namespace CongesSociaux_Web.Data
 
 
         public DbSet<Conge> Conges { get; set; }
+
+        DbSet<Soutien> Soutiens { get; set; }
+        DbSet<Enseignant> Enseignants { get; set; }
+        DbSet<Departement> Departements { get; set; }
+
     }
 }
