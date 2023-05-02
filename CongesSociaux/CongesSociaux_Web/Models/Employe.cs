@@ -7,5 +7,6 @@
         public string Nom { get; set; }
         public DateTime DateEmbauche { get; set; }
 
+        public TypeEmploye Type { get; set; }
     }
 }
